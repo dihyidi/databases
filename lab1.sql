@@ -1,0 +1,478 @@
+USE [master]
+GO
+
+/****** Object:  Database [DatabasesDB]    Script Date: 9/27/2021 9:50:05 AM ******/
+CREATE DATABASE [DatabasesDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'DatabasesDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\DatabasesDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'DatabasesDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\DatabasesDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [DatabasesDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [DatabasesDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [DatabasesDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [DatabasesDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [DatabasesDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [DatabasesDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET RECOVERY FULL 
+GO
+
+ALTER DATABASE [DatabasesDB] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [DatabasesDB] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [DatabasesDB] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [DatabasesDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [DatabasesDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+
+ALTER DATABASE [DatabasesDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+
+ALTER DATABASE [DatabasesDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+
+ALTER DATABASE [DatabasesDB] SET QUERY_STORE = OFF
+GO
+
+ALTER DATABASE [DatabasesDB] SET  READ_WRITE 
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Diagnosis]    Script Date: 9/27/2021 9:49:27 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Diagnosis](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Diagnosis] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Doctors]    Script Date: 9/27/2021 9:50:27 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Doctors](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[ExperienceYrs] [int] NULL,
+	[SpecializationId] [int] NOT NULL,
+	[HospitalId] [int] NOT NULL,
+ CONSTRAINT [PK_Doctors] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[Doctors]  WITH CHECK ADD  CONSTRAINT [FK_Doctors_Hospitals] FOREIGN KEY([HospitalId])
+REFERENCES [koval].[Hospitals] ([Id])
+GO
+
+ALTER TABLE [koval].[Doctors] CHECK CONSTRAINT [FK_Doctors_Hospitals]
+GO
+
+ALTER TABLE [koval].[Doctors]  WITH CHECK ADD  CONSTRAINT [FK_Doctors_Specializations] FOREIGN KEY([SpecializationId])
+REFERENCES [koval].[Specializations] ([Id])
+GO
+
+ALTER TABLE [koval].[Doctors] CHECK CONSTRAINT [FK_Doctors_Specializations]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[DoctorSchedule]    Script Date: 9/27/2021 9:50:38 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[DoctorSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DoctorId] [int] NOT NULL,
+	[WorkScheduleId] [int] NOT NULL,
+ CONSTRAINT [PK_DoctorSchedule] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[DoctorSchedule]  WITH CHECK ADD  CONSTRAINT [FK_DoctorSchedule_Doctors] FOREIGN KEY([DoctorId])
+REFERENCES [koval].[Doctors] ([Id])
+GO
+
+ALTER TABLE [koval].[DoctorSchedule] CHECK CONSTRAINT [FK_DoctorSchedule_Doctors]
+GO
+
+ALTER TABLE [koval].[DoctorSchedule]  WITH CHECK ADD  CONSTRAINT [FK_DoctorSchedule_WorkSchedule] FOREIGN KEY([WorkScheduleId])
+REFERENCES [koval].[WorkSchedule] ([Id])
+GO
+
+ALTER TABLE [koval].[DoctorSchedule] CHECK CONSTRAINT [FK_DoctorSchedule_WorkSchedule]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Hospitals]    Script Date: 9/27/2021 9:50:48 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Hospitals](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Address] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Hospital] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Patients]    Script Date: 9/27/2021 9:51:00 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Patients](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Surname] [nvarchar](max) NOT NULL,
+	[Birthday] [datetime] NOT NULL,
+	[Address] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Patients] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[PatientsDiagnoses]    Script Date: 9/27/2021 9:51:09 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[PatientsDiagnoses](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PatientId] [int] NOT NULL,
+	[VisitId] [int] NOT NULL,
+	[DiagnosisId] [int] NOT NULL,
+ CONSTRAINT [PK_PatientsDiagnoses] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses]  WITH CHECK ADD  CONSTRAINT [FK_PatientsDiagnoses_Diagnosis] FOREIGN KEY([DiagnosisId])
+REFERENCES [koval].[Diagnosis] ([Id])
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses] CHECK CONSTRAINT [FK_PatientsDiagnoses_Diagnosis]
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses]  WITH CHECK ADD  CONSTRAINT [FK_PatientsDiagnoses_Patients] FOREIGN KEY([PatientId])
+REFERENCES [koval].[Patients] ([Id])
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses] CHECK CONSTRAINT [FK_PatientsDiagnoses_Patients]
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses]  WITH CHECK ADD  CONSTRAINT [FK_PatientsDiagnoses_Visits] FOREIGN KEY([VisitId])
+REFERENCES [koval].[Visits] ([Id])
+GO
+
+ALTER TABLE [koval].[PatientsDiagnoses] CHECK CONSTRAINT [FK_PatientsDiagnoses_Visits]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Protocols]    Script Date: 9/27/2021 9:51:19 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Protocols](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PatientId] [int] NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Protocols] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[Protocols]  WITH CHECK ADD  CONSTRAINT [FK_Protocols_Patients] FOREIGN KEY([PatientId])
+REFERENCES [koval].[Patients] ([Id])
+GO
+
+ALTER TABLE [koval].[Protocols] CHECK CONSTRAINT [FK_Protocols_Patients]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Specializations]    Script Date: 9/27/2021 9:51:28 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Specializations](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Specializations] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[Visits]    Script Date: 9/27/2021 9:51:36 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[Visits](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DoctorId] [int] NOT NULL,
+	[PatientId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Price] [money] NOT NULL,
+ CONSTRAINT [PK_Visits] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[Visits]  WITH CHECK ADD  CONSTRAINT [FK_Visits_Doctors] FOREIGN KEY([DoctorId])
+REFERENCES [koval].[Doctors] ([Id])
+GO
+
+ALTER TABLE [koval].[Visits] CHECK CONSTRAINT [FK_Visits_Doctors]
+GO
+
+ALTER TABLE [koval].[Visits]  WITH CHECK ADD  CONSTRAINT [FK_Visits_Patients] FOREIGN KEY([PatientId])
+REFERENCES [koval].[Patients] ([Id])
+GO
+
+ALTER TABLE [koval].[Visits] CHECK CONSTRAINT [FK_Visits_Patients]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[WorkDays]    Script Date: 9/27/2021 9:51:46 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[WorkDays](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Day] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_WorkDays] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[WorkSchedule]    Script Date: 9/27/2021 9:51:57 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[WorkSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[WorkTimeId] [int] NOT NULL,
+	[WorkDayId] [int] NOT NULL,
+ CONSTRAINT [PK_WorkSchedule] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [koval].[WorkSchedule]  WITH CHECK ADD  CONSTRAINT [FK_WorkSchedule_WorkDays] FOREIGN KEY([WorkDayId])
+REFERENCES [koval].[WorkDays] ([Id])
+GO
+
+ALTER TABLE [koval].[WorkSchedule] CHECK CONSTRAINT [FK_WorkSchedule_WorkDays]
+GO
+
+ALTER TABLE [koval].[WorkSchedule]  WITH CHECK ADD  CONSTRAINT [FK_WorkSchedule_WorkTime] FOREIGN KEY([WorkTimeId])
+REFERENCES [koval].[WorkTime] ([Id])
+GO
+
+ALTER TABLE [koval].[WorkSchedule] CHECK CONSTRAINT [FK_WorkSchedule_WorkTime]
+GO
+
+
+
+USE [DatabasesDB]
+GO
+
+/****** Object:  Table [koval].[WorkTime]    Script Date: 9/27/2021 9:52:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [koval].[WorkTime](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[StartTime] [time](7) NOT NULL,
+	[EndTime] [time](7) NOT NULL,
+ CONSTRAINT [PK_WorkTime] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
