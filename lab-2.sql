@@ -22,7 +22,17 @@ join pc
 on prod.model = pc.model
 where pc.speed > 750;
 
--- 6 wii be here
+select ship, battle,
+case 
+	when result = 'OK'
+		then 'в порядку'
+	when result = 'sunk'
+		then 'затонувший'
+	when result = 'damaged'
+		then 'пошкоджений'
+	else 'n/a'
+end as result
+from outcomes;
 
 select prod.maker, min(p.price) from product as prod
 join printer as p
@@ -34,7 +44,10 @@ join pc
 on prod.model = pc.model
 group by prod.maker;
 
--- 9 will be here
+select income.point, income.date, max(income.inc), max(outcome.out)
+from income
+join outcome on income.point = outcome.point
+group by point, date;
 
 select prod.type, prod.model, max(x.price)
 from product as prod
