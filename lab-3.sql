@@ -1,5 +1,5 @@
-create database if not exists koval_ehealth;
-use koval_ehealth;
+create database if not exists koval;
+use koval;
 
 drop table if exists patient_diagnosis;
 drop table if exists visit;
@@ -63,7 +63,7 @@ price decimal not null);
 create table patient_diagnosis (
 id bigint auto_increment primary key,
 diagnosis_id bigint not null,
-visit_id bigint not null);
+patient_id bigint not null);
 
 alter table doctor
 add constraint FK_doctor_specialization foreign key (specialization_id) references specialization (id);
@@ -82,7 +82,7 @@ add constraint FK_visit_doctor foreign key (doctor_id) references doctor (id);
 
 alter table patient_diagnosis
 add constraint FK_patient_diagnosis_diagnosis foreign key (diagnosis_id) references diagnosis (id),
-add constraint FK_patient_diagnosis_visit foreign key (visit_id) references visit (id);
+add constraint FK_patient_diagnosis_patient foreign key (patient_id) references patient (id);
 
 create index name_surname on patient(name, surname);
 create index diagnosis on patient_diagnosis(diagnosis_id);
@@ -159,7 +159,7 @@ insert into visit (patient_id, doctor_id, date, price) values
 (5, 1, '2020-05-01', 300.00),
 (6, 3, '2020-06-03', 600.00);
 
-insert into patient_diagnosis (diagnosis_id, visit_id) values
+insert into patient_diagnosis (diagnosis_id, patient_id) values
 (2, 3),
 (1, 6),
 (3, 5),
