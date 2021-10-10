@@ -14,7 +14,7 @@ public class View {
     public View() {
         controller = new SpecializationController();
         menu = new LinkedHashMap<>();
-        menu.put("1", "  1 - print Specializations");
+        menu.put("1", "  1 - print beans");
         menu.put("2", "  2 - get bean by id");
         menu.put("3", "  3 - add bean");
         menu.put("4", "  4 - update bean");

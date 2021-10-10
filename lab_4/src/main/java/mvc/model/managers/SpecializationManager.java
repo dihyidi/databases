@@ -1,148 +1,53 @@
 package mvc.model.managers;
 
 import mvc.model.beans.Specialization;
-import mvc.model.dao.DatabaseCloser;
-import mvc.model.dao.DatabaseConnector;
 import mvc.model.dao.SqlQuery;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class SpecializationManager implements Manager<Specialization> {
-    private static final Connection conn = DatabaseConnector.getConnection();
-    private static final String table = "specialization";
+public class SpecializationManager extends ManagerImpl<Specialization> {
 
-    @Override
-    public List<Specialization> getBeans() {
-        List<Specialization> specializationList = new ArrayList<>();
-
-        Statement stmt = null;
-        ResultSet res = null;
-
-        String sql = SqlQuery.SelectAll(table);
-
-        try {
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-            res = stmt.executeQuery(sql);
-            while(res.next()) {
-                Specialization spec = new Specialization();
-                spec.setId(res.getInt("id"));
-                spec.setName(res.getString("name"));
-                specializationList.add(spec);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error code: " +e.getErrorCode());
-            System.err.println("SQL state: " +e.getSQLState());
-        } finally {
-            DatabaseCloser.close(res, stmt);
-        }
-
-        return specializationList;
+    public SpecializationManager() {
+        super("specialization");
     }
 
     @Override
-    public Specialization getBeanById(int id) {
-        Specialization spec = null;
-
-        PreparedStatement prepStmt = null;
-        ResultSet res = null;
-
-        String sql = SqlQuery.SelectById(table);
-
+    protected Specialization getBeanInstance(ResultSet res) {
+        var spec = new Specialization();
         try {
-            prepStmt = conn.prepareStatement(sql);
-            prepStmt.setInt(1, id);
-            res = prepStmt.executeQuery();
-
-            if(res.next()) {
-                spec = new Specialization();
-                spec.setId(id);
-                spec.setName(res.getString("name"));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error code: " +e.getErrorCode());
-            System.err.println("SQL state: " +e.getSQLState());
-        } finally {
-            DatabaseCloser.close(res, prepStmt);
+            spec.setId(res.getInt("id"));
+            spec.setName(res.getString("name"));
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
         }
         return spec;
     }
 
     @Override
-    public boolean addBean(Specialization bean) {
-        boolean isAdded = false;
-        int affectedRows = 0;
-        PreparedStatement prepStmt = null;
-
-        if(bean != null) {
-            String sql = SqlQuery.Add(table, new String[]{"name"});
-            try {
-                prepStmt = conn.prepareStatement(sql);
-                prepStmt.setString(1, "spec1");
-                affectedRows = prepStmt.executeUpdate();
-            } catch (SQLException e) {
-                System.err.println("Error message: " + e.getMessage());
-                System.err.println("Error code: " +e.getErrorCode());
-                System.err.println("SQL state: " +e.getSQLState());
-            } finally {
-                DatabaseCloser.close(prepStmt);
-            }
-            isAdded = (affectedRows != 0);
-        }
-        return isAdded;
+    protected String getSqlAdd() {
+        return SqlQuery.Add(tableName, new String[]{"name"});
     }
 
     @Override
-    public boolean updateBean(int id, Specialization bean) {
-        boolean isUpdated = false;
-        int affectedRows = 0;
-        PreparedStatement prepStmt = null;
-
-        if(bean != null) {
-            String sql = SqlQuery.Update(table, new String[]{"name"});
-            try {
-                prepStmt = conn.prepareStatement(sql);
-                prepStmt.setString(1, "spec2");
-                prepStmt.setInt(2, 2);
-                affectedRows = prepStmt.executeUpdate();
-            } catch (SQLException e) {
-                System.err.println("Error message: " + e.getMessage());
-                System.err.println("Error code: " +e.getErrorCode());
-                System.err.println("SQL state: " +e.getSQLState());
-            } finally {
-                DatabaseCloser.close(prepStmt);
-            }
-            isUpdated = (affectedRows != 0);
+    protected void setPrepStmtParams(PreparedStatement prepStmt, Specialization bean) {
+        try {
+            prepStmt.setString(1, bean.getName());
         }
-        return isUpdated;
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
-    public boolean deleteBean(int id) {
-        boolean isDeleted = false;
-        int affectedRows = 0;
-        PreparedStatement prepStmt = null;
+    protected String getSqlUpdate() {
+        return SqlQuery.Update(tableName, new String[]{"name"});
+    }
 
-        if(id != 0) {
-            String sql = SqlQuery.Delete(table);
-            try {
-                prepStmt = conn.prepareStatement(sql);
-                prepStmt.setInt(1, id);
-                affectedRows = prepStmt.executeUpdate();
-            } catch (SQLException e) {
-                System.err.println("Error message: " + e.getMessage());
-                System.err.println("Error code: " +e.getErrorCode());
-                System.err.println("SQL state: " +e.getSQLState());
-            } finally {
-                DatabaseCloser.close(prepStmt);
-            }
-            isDeleted = (affectedRows != 0);
-        }
-        return isDeleted;
+    @Override
+    protected String getSqlDelete() {
+        return SqlQuery.Delete(tableName);
     }
 }
