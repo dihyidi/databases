@@ -1,10 +1,11 @@
 package mvc;
 
-import mvc.view.View;
+import mvc.view.GeneralView;
 
 public class Application {
 
     public static void main(String[] args) {
-        new View().show();
+        System.out.println("Please input bean id");
+        new GeneralView().show();
     }
 }

@@ -1,18 +1,18 @@
 package mvc.view;
 
-import mvc.controller.SpecializationController;
+import mvc.controller.Controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class View {
-    private final SpecializationController controller;
+public class BeanView<T> {
+    private final Controller<T> controller;
     private final Map<String, String> menu;
     private final static Scanner input = new Scanner(System.in);
 
-    public View() {
-        controller = new SpecializationController();
+    public BeanView(Controller<T> controller) {
+        this.controller = controller;
         menu = new LinkedHashMap<>();
         menu.put("1", "  1 - print beans");
         menu.put("2", "  2 - get bean by id");
@@ -33,7 +33,7 @@ public class View {
     }
 
     private void pressButton3() {
-        System.out.println(controller.getBeans());
+        System.out.println(controller);
     }
 
     private void pressButton4() {
