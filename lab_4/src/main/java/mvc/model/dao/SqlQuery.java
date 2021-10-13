@@ -11,7 +11,7 @@ public class SqlQuery {
     }
 
     public static String Add(String tableName, String[] paramNames) {
-        StringBuilder tmp = new StringBuilder("insert into");
+        StringBuilder tmp = new StringBuilder("insert into ");
         tmp.append(tableName);
         tmp.append(" (");
         for (int i = 0; i < paramNames.length; i++) {
@@ -39,11 +39,12 @@ public class SqlQuery {
         tmp.append(" set ");
         for (int i = 0; i < paramNames.length; i++) {
             tmp.append(paramNames[i]);
+            tmp.append("=?");
             if(i != paramNames.length-1){
-                tmp.append("=?, ");
+                tmp.append(", ");
             }
         }
-        tmp.append("where id=?");
+        tmp.append(" where id=?");
 
         return tmp.toString();
     }

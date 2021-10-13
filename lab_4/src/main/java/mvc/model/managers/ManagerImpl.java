@@ -75,7 +75,7 @@ public abstract class ManagerImpl<T> implements Manager<T>{
     }
 
     protected abstract String getSqlAdd();
-    protected abstract void setPrepStmtParams(PreparedStatement prepStmt, T bean);
+    protected abstract void setPrepStmtParamsForAdd(PreparedStatement prepStmt, T bean);
 
     @Override
     public boolean addBean(T bean) {
@@ -85,12 +85,13 @@ public abstract class ManagerImpl<T> implements Manager<T>{
 
         if(bean != null) {
             String sql = getSqlAdd();
-            isAdded = modifyBean(affectedRows, prepStmt, bean, sql);
+            isAdded = modifyBeanOnAdd(affectedRows, prepStmt, bean, sql);
         }
         return isAdded;
     }
 
     protected abstract String getSqlUpdate();
+    protected abstract void setPrepStmtParamsForUpdate(PreparedStatement prepStmt, T bean);
 
     @Override
     public boolean updateBean(int id, T bean) {
@@ -100,16 +101,33 @@ public abstract class ManagerImpl<T> implements Manager<T>{
 
         if(bean != null) {
             String sql = getSqlUpdate();
-            isUpdated = modifyBean(affectedRows, prepStmt, bean, sql);
+            isUpdated = modifyBeanOnUpdate(affectedRows, prepStmt, bean, sql);
         }
         return isUpdated;
     }
 
-    private boolean modifyBean(int affectedRows, PreparedStatement prepStmt, T bean, String sql) {
+    private boolean modifyBeanOnAdd(int affectedRows, PreparedStatement prepStmt, T bean, String sql) {
         boolean isUpdated;
         try {
             prepStmt = conn.prepareStatement(sql);
-            setPrepStmtParams(prepStmt, bean);
+            setPrepStmtParamsForAdd(prepStmt, bean);
+            affectedRows = prepStmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error message: " + e.getMessage());
+            System.err.println("Error code: " +e.getErrorCode());
+            System.err.println("SQL state: " +e.getSQLState());
+        } finally {
+            DatabaseCloser.close(prepStmt);
+        }
+        isUpdated = (affectedRows != 0);
+        return isUpdated;
+    }
+
+    private boolean modifyBeanOnUpdate(int affectedRows, PreparedStatement prepStmt, T bean, String sql) {
+        boolean isUpdated;
+        try {
+            prepStmt = conn.prepareStatement(sql);
+            setPrepStmtParamsForUpdate(prepStmt, bean);
             affectedRows = prepStmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error message: " + e.getMessage());

@@ -32,12 +32,12 @@ public class BeanView<T> {
         System.out.println(controller.getBeanById(id));
     }
 
-    private void pressButton3() {
-        System.out.println(controller);
-    }
+    protected void pressButton3() { System.out.println(controller.addBean()); }
 
     private void pressButton4() {
-        System.out.println(controller.getBeans());
+        System.out.println("Please input bean id");
+        int id = input.nextInt();
+        System.out.println(controller.updateBean(id));
     }
 
     private void pressButton5() {
@@ -66,6 +66,12 @@ public class BeanView<T> {
                         break;
                     case"2":
                         pressButton2();
+                        break;
+                    case"3":
+                        pressButton3();
+                        break;
+                    case"4":
+                        pressButton4();
                         break;
                         case"5":
                         pressButton5();

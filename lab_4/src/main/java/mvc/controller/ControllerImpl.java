@@ -21,9 +21,14 @@ public class ControllerImpl<T> implements Controller<T>{
     }
 
     @Override
+    public boolean addBean() { return false; }
+    @Override
     public boolean addBean(T bean) {
         return manager.addBean(bean);
     }
+
+    @Override
+    public boolean updateBean(int id) { return false; }
 
     @Override
     public boolean updateBean(int id, T bean) {

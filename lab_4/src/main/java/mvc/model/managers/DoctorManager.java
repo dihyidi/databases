@@ -31,7 +31,7 @@ public class DoctorManager extends ManagerImpl<Doctor> {
     }
 
     @Override
-    protected void setPrepStmtParams(PreparedStatement prepStmt, Doctor bean) {
+    protected void setPrepStmtParamsForAdd(PreparedStatement prepStmt, Doctor bean) {
         try {
             prepStmt.setString(1, bean.getName());
             prepStmt.setInt(2, bean.getExperienceYrs());
@@ -39,11 +39,25 @@ public class DoctorManager extends ManagerImpl<Doctor> {
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
-        }    }
+        }
+    }
 
     @Override
     protected String getSqlUpdate() {
         return SqlQuery.Update(tableName, new String[]{"name", "experience_yrs", "specialization_id"});
+    }
+
+    @Override
+    protected void setPrepStmtParamsForUpdate(PreparedStatement prepStmt, Doctor bean) {
+        try {
+            prepStmt.setString(1, bean.getName());
+            prepStmt.setInt(2, bean.getExperienceYrs());
+            prepStmt.setInt(3, bean.getSpecializationId());
+            prepStmt.setInt(4, bean.getId());
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

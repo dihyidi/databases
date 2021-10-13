@@ -32,7 +32,7 @@ public class SpecializationManager extends ManagerImpl<Specialization> {
     }
 
     @Override
-    protected void setPrepStmtParams(PreparedStatement prepStmt, Specialization bean) {
+    protected void setPrepStmtParamsForAdd(PreparedStatement prepStmt, Specialization bean) {
         try {
             prepStmt.setString(1, bean.getName());
         }
@@ -40,6 +40,17 @@ public class SpecializationManager extends ManagerImpl<Specialization> {
             System.out.println(e.getMessage());
         }
     }
+    @Override
+    protected void setPrepStmtParamsForUpdate(PreparedStatement prepStmt, Specialization bean) {
+        try {
+            prepStmt.setString(1, bean.getName());
+            prepStmt.setInt(2, bean.getId());
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     @Override
     protected String getSqlUpdate() {

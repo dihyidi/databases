@@ -66,23 +66,32 @@ patient_id bigint not null,
 primary key(diagnosis_id, patient_id));
 
 alter table doctor
-add constraint FK_doctor_specialization foreign key (specialization_id) references specialization (id);
+add constraint FK_doctor_specialization foreign key (specialization_id) references specialization (id) 
+on delete cascade on update cascade;
 
 alter table work_schedule
-add constraint FK_work_schedule_work_day foreign key (work_day_id) references work_day (id),
-add constraint FK_work_schedule_work_time foreign key (work_time_id) references work_time (id);
+add constraint FK_work_schedule_work_day foreign key (work_day_id) references work_day (id) 
+on delete cascade on update cascade,
+add constraint FK_work_schedule_work_time foreign key (work_time_id) references work_time (id) 
+on delete cascade on update cascade;
 
 alter table doctor_schedule
-add constraint FK_doctor_schedule_work_schedule foreign key (work_day_id, work_time_id) references work_schedule (work_day_id, work_time_id),
-add constraint FK_doctor_schedule_doctor foreign key (doctor_id) references doctor (id);
+add constraint FK_doctor_schedule_work_schedule foreign key (work_day_id, work_time_id) references work_schedule (work_day_id, work_time_id)
+on delete cascade on update cascade,
+add constraint FK_doctor_schedule_doctor foreign key (doctor_id) references doctor (id)
+on delete cascade on update cascade;
 
 alter table visit
-add constraint FK_visit_patient foreign key (patient_id) references patient (id),
-add constraint FK_visit_doctor foreign key (doctor_id) references doctor (id);
+add constraint FK_visit_patient foreign key (patient_id) references patient (id)
+on delete cascade on update cascade,
+add constraint FK_visit_doctor foreign key (doctor_id) references doctor (id)
+on delete cascade on update cascade;
 
 alter table patient_diagnosis
-add constraint FK_patient_diagnosis_diagnosis foreign key (diagnosis_id) references diagnosis (id),
-add constraint FK_patient_diagnosis_patient foreign key (patient_id) references patient (id);
+add constraint FK_patient_diagnosis_diagnosis foreign key (diagnosis_id) references diagnosis (id)
+on delete cascade on update cascade,
+add constraint FK_patient_diagnosis_patient foreign key (patient_id) references patient (id)
+on delete cascade on update cascade;
 
 create index name_surname on patient(name, surname);
 create index diagnosis on patient_diagnosis(diagnosis_id);
@@ -166,3 +175,6 @@ insert into patient_diagnosis (diagnosis_id, patient_id) values
 (4, 1),
 (5, 2),
 (6, 4);
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
