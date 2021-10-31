@@ -11,7 +11,7 @@ public class GeneralView {
     private final Map<String, String> menu;
     private final static Scanner input = new Scanner(System.in);
 
-    public GeneralView(){
+    public GeneralView() {
         menu = new LinkedHashMap<>();
         menu.put("1", " 1 - doctor" );
         menu.put("2", " 2 - specialization");
@@ -32,7 +32,7 @@ public class GeneralView {
             System.out.println("Please, select menu point.");
             keyMenu = input.nextLine().toUpperCase();
             try {
-                switch (keyMenu){
+                switch (keyMenu) {
                     case "1":
                         new BeanView<>(new DoctorController()).show();
                         break;

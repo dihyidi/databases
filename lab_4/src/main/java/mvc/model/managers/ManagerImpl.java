@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ManagerImpl<T> implements Manager<T>{
+public abstract class ManagerImpl<T> implements Manager<T> {
     private static final Connection conn = DatabaseConnector.getConnection();
     protected String tableName;
 
@@ -37,8 +37,8 @@ public abstract class ManagerImpl<T> implements Manager<T>{
             }
         } catch (SQLException e) {
             System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error code: " +e.getErrorCode());
-            System.err.println("SQL state: " +e.getSQLState());
+            System.err.println("Error code: " + e.getErrorCode());
+            System.err.println("SQL state: " + e.getSQLState());
         } finally {
             DatabaseCloser.close(res, stmt);
         }
@@ -60,14 +60,14 @@ public abstract class ManagerImpl<T> implements Manager<T>{
             prepStmt.setInt(1, id);
             res = prepStmt.executeQuery();
 
-            if(res.next()) {
+            if (res.next()) {
                 bean = getBeanInstance(res);
             }
 
         } catch (SQLException e) {
             System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error code: " +e.getErrorCode());
-            System.err.println("SQL state: " +e.getSQLState());
+            System.err.println("Error code: " + e.getErrorCode());
+            System.err.println("SQL state: " + e.getSQLState());
         } finally {
             DatabaseCloser.close(res, prepStmt);
         }
@@ -83,7 +83,7 @@ public abstract class ManagerImpl<T> implements Manager<T>{
         int affectedRows = 0;
         PreparedStatement prepStmt = null;
 
-        if(bean != null) {
+        if (bean != null) {
             String sql = getSqlAdd();
             isAdded = modifyBeanOnAdd(affectedRows, prepStmt, bean, sql);
         }
@@ -99,7 +99,7 @@ public abstract class ManagerImpl<T> implements Manager<T>{
         int affectedRows = 0;
         PreparedStatement prepStmt = null;
 
-        if(bean != null) {
+        if (bean != null) {
             String sql = getSqlUpdate();
             isUpdated = modifyBeanOnUpdate(affectedRows, prepStmt, bean, sql);
         }
@@ -131,8 +131,8 @@ public abstract class ManagerImpl<T> implements Manager<T>{
             affectedRows = prepStmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error code: " +e.getErrorCode());
-            System.err.println("SQL state: " +e.getSQLState());
+            System.err.println("Error code: " + e.getErrorCode());
+            System.err.println("SQL state: " + e.getSQLState());
         } finally {
             DatabaseCloser.close(prepStmt);
         }
@@ -148,7 +148,7 @@ public abstract class ManagerImpl<T> implements Manager<T>{
         int affectedRows = 0;
         PreparedStatement prepStmt = null;
 
-        if(id != 0) {
+        if (id != 0) {
             String sql = getSqlDelete();
             try {
                 prepStmt = conn.prepareStatement(sql);
@@ -156,8 +156,8 @@ public abstract class ManagerImpl<T> implements Manager<T>{
                 affectedRows = prepStmt.executeUpdate();
             } catch (SQLException e) {
                 System.err.println("Error message: " + e.getMessage());
-                System.err.println("Error code: " +e.getErrorCode());
-                System.err.println("SQL state: " +e.getSQLState());
+                System.err.println("Error code: " + e.getErrorCode());
+                System.err.println("SQL state: " + e.getSQLState());
             } finally {
                 DatabaseCloser.close(prepStmt);
             }

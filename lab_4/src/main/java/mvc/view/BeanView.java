@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class BeanView<T> {
     private final Controller<T> controller;
     private final Map<String, String> menu;
-    private final static Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
     public BeanView(Controller<T> controller) {
         this.controller = controller;

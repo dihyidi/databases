@@ -1,7 +1,6 @@
 package mvc.controller;
 
 import mvc.model.beans.Doctor;
-import mvc.model.beans.Specialization;
 import mvc.model.managers.DoctorManager;
 
 import java.util.Scanner;
