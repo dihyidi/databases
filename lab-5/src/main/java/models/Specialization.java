@@ -3,11 +3,10 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.engine.internal.UnsavedValueFactory;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 @Table(name = "specialization")
@@ -19,16 +18,24 @@ public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
-    private Doctor doctor;
+    @OneToMany(mappedBy = "specialization", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<Doctor> doctors;
 
     public Specialization(String name) {
         this.name = name;
+        this.doctors = new ArrayList<>();
+    }
+
+    public void addDoctor(Doctor doctor){
+        doctor.setSpecialization(this);
+        doctors.add(doctor);
+    }
+
+    @Override
+    public String toString() {
+        return "specialization: id=" + id + " name=" + name;
     }
 }

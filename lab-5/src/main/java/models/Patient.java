@@ -5,46 +5,49 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-@Table(name = "patient")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "patient")
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "surname")
     private String surname;
-    @Column(name = "birthday")
     private Date birthday;
-    @Column(name = "address")
     private String address;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
-    private List<Visit> visit;
+    private List<Visit> visits;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "patient_diagnosis",
-            joinColumns = { @JoinColumn(name = "patient_id") },
-            inverseJoinColumns = { @JoinColumn(name = "diagnosis_id") }
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "diagnosis_id")
     )
-    Set<Diagnosis> patientDiagnosis = new HashSet<>();
+    private Set<Diagnosis> diagnoses;
 
     public Patient(String name, String surname, Date birthday, String address) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
         this.address = address;
+        this.diagnoses = new HashSet<>();
+    }
+
+    @Override
+    public String toString() {
+        return "patient: id=" + id
+                + " name=" + name
+                + " surname=" + surname
+                + " birthday=" + birthday
+                + " address=" + address
+                + " diagnoses=" + Arrays.toString(diagnoses.toArray());
     }
 }

@@ -4,9 +4,11 @@ import dao.DoctorDaoImpl;
 import models.Doctor;
 
 public class DoctorController extends ControllerImpl<Doctor> {
+    private final SpecializationController specializationController;
 
     public DoctorController() {
         super(new DoctorDaoImpl());
+        specializationController = new SpecializationController();
     }
 
     @Override
@@ -18,6 +20,7 @@ public class DoctorController extends ControllerImpl<Doctor> {
     @Override
     public boolean updateEntity(int id) {
         Doctor doctor = inputEntity();
+        doctor.setId(id);
         return super.updateEntity(id, doctor);
     }
 
@@ -27,6 +30,9 @@ public class DoctorController extends ControllerImpl<Doctor> {
         var name = input.nextLine();
         System.out.println("Please input experience:");
         var exp = Integer.parseInt(input.nextLine());
-        return new Doctor(name, exp);
+        System.out.println("Please input specialization id:");
+        var specId = Integer.parseInt(input.nextLine());
+        var spec =  this.specializationController.getEntityById(specId);
+        return new Doctor(name, exp, spec);
     }
 }

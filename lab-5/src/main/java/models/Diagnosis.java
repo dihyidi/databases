@@ -5,25 +5,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table(name = "diagnosis")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "diagnosis")
 public class Diagnosis {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "protocol")
     private String protocol;
+
+    @ManyToMany(mappedBy = "diagnoses")
+    private List<Patient> patients;
 
     public Diagnosis(String name, String protocol) {
         this.name = name;
         this.protocol = protocol;
+        this.patients = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "diagnosis: id=" + id + " name=" + name + " protocol=" + protocol;
     }
 }

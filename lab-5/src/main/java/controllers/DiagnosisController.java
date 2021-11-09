@@ -18,6 +18,7 @@ public class DiagnosisController extends ControllerImpl<Diagnosis> {
     @Override
     public boolean updateEntity(int id) {
         Diagnosis diagnosis = inputEntity();
+        diagnosis.setId(id);
         return super.updateEntity(id, diagnosis);
     }
 

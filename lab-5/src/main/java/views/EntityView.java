@@ -1,6 +1,7 @@
 package views;
 
 import controllers.Controller;
+import controllers.PatientController;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +20,9 @@ public class EntityView<T> {
         menu.put("3", "  3 - add");
         menu.put("4", "  4 - update");
         menu.put("5", "  5 - delete");
+        if (controller instanceof PatientController) {
+            menu.put("6", "6 - add diagnosis");
+        }
         menu.put("Q", "  Q - exit");
     }
 
@@ -46,6 +50,10 @@ public class EntityView<T> {
         System.out.println(controller.deleteEntity(id));
     }
 
+    private void pressButton6() {
+        System.out.println(((PatientController)controller).addDiagnosis());
+    }
+
     private void outputMenu() {
         System.out.println("\nMENU:");
         for (String str : menu.values()) {
@@ -61,24 +69,14 @@ public class EntityView<T> {
             keyMenu = input.nextLine().toUpperCase();
             try {
                 switch (keyMenu) {
-                    case "1":
-                        pressButton1();
-                        break;
-                    case "2":
-                        pressButton2();
-                        break;
-                    case "3":
-                        pressButton3();
-                        break;
-                    case "4":
-                        pressButton4();
-                        break;
-                    case "5":
-                        pressButton5();
-                        break;
-                    default:
-                        System.out.println("kk");
-                        break;
+                    case "1" -> pressButton1();
+                    case "2" -> pressButton2();
+                    case "3" -> pressButton3();
+                    case "4" -> pressButton4();
+                    case "5" -> pressButton5();
+                    case "6" -> pressButton6();
+                    default -> {
+                    }
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());

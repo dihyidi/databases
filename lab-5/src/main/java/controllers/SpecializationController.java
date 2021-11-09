@@ -18,6 +18,7 @@ public class SpecializationController extends ControllerImpl<Specialization> {
     @Override
     public boolean updateEntity(int id) {
         Specialization specialization = inputEntity();
+        specialization.setId(id);
         return super.updateEntity(id, specialization);
     }
 

@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PatientController extends ControllerImpl<Patient> {
+private final DiagnosisController diagnosisController;
 
     public PatientController() {
         super(new PatientDaoImpl());
+        this.diagnosisController = new DiagnosisController();
     }
 
     @Override
@@ -22,6 +24,7 @@ public class PatientController extends ControllerImpl<Patient> {
     @Override
     public boolean updateEntity(int id) {
         Patient patient = inputEntity();
+        patient.setId(id);
         return super.updateEntity(id, patient);
     }
 
@@ -41,5 +44,27 @@ public class PatientController extends ControllerImpl<Patient> {
         System.out.println("Please input address:");
         var address = input.nextLine();
         return new Patient(name, surname, birthday, address);
+    }
+
+    public boolean addDiagnosis() {
+        var success = false;
+
+        System.out.println("Please input patient id:");
+        var patientId = Integer.parseInt(input.nextLine());
+        var patient = this.getEntityById(patientId);
+        System.out.println("Please input diagnosis id:");
+        var diagnosisId = Integer.parseInt(input.nextLine());
+        var diagnosis = this.diagnosisController.getEntityById(diagnosisId);
+
+        try {
+            var prev = patient.getDiagnoses();
+            prev.add(diagnosis);
+            patient.setDiagnoses(prev);
+            success = true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return success;
     }
 }

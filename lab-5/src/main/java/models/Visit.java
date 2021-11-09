@@ -16,23 +16,27 @@ public class Visit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "date")
     private Date date;
-    @Column(name = "price")
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    public Visit(Date date, int price) {
+    public Visit(Date date, int price, Patient patient, Doctor doctor) {
         this.date = date;
         this.price = price;
+        this.patient = patient;
+        this.doctor = doctor;
+    }
+
+    @Override
+    public String toString() {
+        return "visit: id=" + id + " date=" + date + " price=" + price + " patientId=" + patient.getId() + " doctorId=" + doctor.getId();
     }
 }

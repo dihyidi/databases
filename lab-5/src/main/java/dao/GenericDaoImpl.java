@@ -1,7 +1,6 @@
 package dao;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import utils.HibernateSessionFactoryUtil;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     private final Class<T> currentClass;
-    protected final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
 
     protected GenericDaoImpl(Class<T> currentClass) {
         this.currentClass = currentClass;
@@ -20,7 +18,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     public List<T> getEntities() {
         List<T> items = new ArrayList<>();
 
-        try (Session session = sessionFactory.openSession()) {
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             items = session.createQuery("from " + currentClass.getName()).getResultList();
             session.getTransaction().commit();
@@ -29,13 +27,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             System.out.println(e.getMessage());
         }
         return items;
-    };
+    }
 
     @Override
     public T getEntityById(int id) {
         T item = null;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             item = session.get(currentClass, id);
             session.getTransaction().commit();
@@ -44,13 +42,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             System.out.println(e.getMessage());
         }
         return item;
-    };
+    }
 
     @Override
     public boolean addEntity(T entity) {
         boolean isSuccess = true;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(entity);
             session.getTransaction().commit();
@@ -61,13 +59,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         }
 
         return isSuccess;
-    };
+    }
 
     @Override
     public boolean updateEntity(int id, T entity) {
         boolean isSuccess = true;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.update(entity);
             session.getTransaction().commit();
@@ -78,13 +76,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         }
 
         return isSuccess;
-    };
+    }
 
     @Override
     public boolean deleteEntity(int id) {
         boolean isSuccess = true;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             T entity = session.get(currentClass, id);
             if (entity != null) {
@@ -98,5 +96,5 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     }
 
         return isSuccess;
-    };
+    }
 }
