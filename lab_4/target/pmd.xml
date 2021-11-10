@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.38.0" timestamp="2021-10-13T17:55:23.739">
+<file name="C:\Users\dnkov\tazasho\3\db\lab_4\src\main\java\mvc\model\dao\DatabaseConnector.java">
+<violation beginline="10" endline="10" begincolumn="33" endcolumn="36" rule="UnusedPrivateField" ruleset="Best Practices" package="mvc.model.dao" class="DatabaseConnector" variable="user" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_bestpractices.html#unusedprivatefield" priority="3">
+Avoid unused private fields such as 'user'.
+</violation>
+<violation beginline="11" endline="11" begincolumn="33" endcolumn="40" rule="UnusedPrivateField" ruleset="Best Practices" package="mvc.model.dao" class="DatabaseConnector" variable="password" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_bestpractices.html#unusedprivatefield" priority="3">
+Avoid unused private fields such as 'password'.
+</violation>
+</file>
+<file name="C:\Users\dnkov\tazasho\3\db\lab_4\src\main\java\mvc\model\dao\SqlQuery.java">
+<violation beginline="3" endline="3" begincolumn="1" endcolumn="24" rule="UnnecessaryImport" ruleset="Code Style" package="mvc.model.dao" class="SqlQuery" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_codestyle.html#unnecessaryimport" priority="4">
+Unused import 'java.util.Arrays'
+</violation>
+</file>
+<file name="C:\Users\dnkov\tazasho\3\db\lab_4\src\main\java\mvc\model\managers\ManagerImpl.java">
+<violation beginline="122" endline="122" begincolumn="22" endcolumn="38" rule="UselessParentheses" ruleset="Code Style" package="mvc.model.managers" class="ManagerImpl" method="modifyBeanOnAdd" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_codestyle.html#uselessparentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="139" endline="139" begincolumn="22" endcolumn="38" rule="UselessParentheses" ruleset="Code Style" package="mvc.model.managers" class="ManagerImpl" method="modifyBeanOnUpdate" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_codestyle.html#uselessparentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="164" endline="164" begincolumn="26" endcolumn="42" rule="UselessParentheses" ruleset="Code Style" package="mvc.model.managers" class="ManagerImpl" method="deleteBean" externalInfoUrl="https://pmd.github.io/pmd-6.38.0/pmd_rules_java_codestyle.html#uselessparentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>
