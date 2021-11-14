@@ -19,9 +19,9 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         List<T> items = new ArrayList<>();
 
         try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+            var tx = session.beginTransaction();
             items = session.createQuery("from " + currentClass.getName()).getResultList();
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -34,9 +34,9 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         T item = null;
 
         try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+            var tx = session.beginTransaction();
             item = session.get(currentClass, id);
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -49,9 +49,9 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         boolean isSuccess = true;
 
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+            var tx = session.beginTransaction();
             session.save(entity);
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         } catch (Exception e) {
             isSuccess = false;
@@ -66,9 +66,9 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         boolean isSuccess = true;
 
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+            var tx = session.beginTransaction();
             session.update(entity);
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         } catch (Exception e) {
             isSuccess = false;
@@ -83,12 +83,12 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         boolean isSuccess = true;
 
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
+            var tx = session.beginTransaction();
             T entity = session.get(currentClass, id);
             if (entity != null) {
                 session.delete(entity);
             }
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         } catch (Exception e) {
             isSuccess = false;

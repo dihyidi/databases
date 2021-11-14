@@ -60,6 +60,7 @@ private final DiagnosisController diagnosisController;
             var prev = patient.getDiagnoses();
             prev.add(diagnosis);
             patient.setDiagnoses(prev);
+            this.updateEntity(patientId, patient);
             success = true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
