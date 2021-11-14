@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class DoctorMapper implements BaseMapper<Doctor, DoctorDto> {
     @Override
     public DoctorDto mapEntityToDto(Doctor doctor) {
-        return new DoctorDto(doctor.getId(), doctor.getName(), doctor.getExperienceYrs(), doctor.getSpecialization());
+        return new DoctorDto(doctor.getId(), doctor.getName(), doctor.getExperienceYrs(), doctor.getSpecialization().getId());
     }
 }

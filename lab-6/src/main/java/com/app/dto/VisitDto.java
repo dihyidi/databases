@@ -1,7 +1,5 @@
 package com.app.dto;
 
-import com.app.domain.Doctor;
-import com.app.domain.Patient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +15,6 @@ public class VisitDto {
     protected Integer id;
     private Date date;
     private double price;
-    private Patient patient;
-    private Doctor doctor;
+    private int patientId;
+    private int doctorId;
 }
