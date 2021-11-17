@@ -29,11 +29,9 @@ public abstract class BaseController<TEntity, TDto, TId> {
     public @ResponseBody
     ResponseEntity<TDto> getById(@PathVariable TId id){
         TEntity entity = getService().getById(id);
-        if(entity == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        else {
-            return new ResponseEntity<>(getMapper().mapEntityToDto(entity), HttpStatus.OK);
-        }
+        return entity == null
+                ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+                : new ResponseEntity<>(getMapper().mapEntityToDto(entity), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST,
