@@ -18,7 +18,7 @@ public class PatientController extends BaseController<Patient, PatientDto, Integ
     private final PatientMapper mapper;
 
     @Override
-    protected BaseService<Patient, Integer> getService() {
+    protected BaseService<Patient, Integer, PatientDto> getService() {
         return service;
     }
 

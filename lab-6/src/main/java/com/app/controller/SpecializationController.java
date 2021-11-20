@@ -18,7 +18,7 @@ public class SpecializationController extends BaseController<Specialization, Spe
     private final SpecializationMapper mapper;
 
     @Override
-    protected BaseService<Specialization, Integer> getService() {
+    protected BaseService<Specialization, Integer, SpecializationDto> getService() {
         return service;
     }
 

@@ -27,6 +27,13 @@ public class Visit {
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
+    public Visit(Date date, double price, Patient pat, Doctor doc) {
+        this.patient = pat;
+        this.doctor = doc;
+        this.price = price;
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "visit: id=" + id + " date=" + date + " price=" + price + " patientId=" + patient.getId() + " doctorId=" + doctor.getId();

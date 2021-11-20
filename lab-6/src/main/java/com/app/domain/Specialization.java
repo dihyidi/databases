@@ -21,6 +21,10 @@ public class Specialization {
     @OneToMany(mappedBy = "specialization", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Doctor> doctors;
 
+    public Specialization(String name) {
+        this.name = name;
+    }
+
     public void addDoctor(Doctor doctor){
         doctor.setSpecialization(this);
         doctors.add(doctor);

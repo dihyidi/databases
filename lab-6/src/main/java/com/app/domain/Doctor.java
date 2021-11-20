@@ -27,6 +27,12 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", fetch = FetchType.EAGER)
     private Collection<Visit> visits;
 
+    public Doctor(String name, int experienceYrs, Specialization spec) {
+        this.name = name;
+        this.experienceYrs = experienceYrs;
+        this.specialization = spec;
+    }
+
     @Override
     public String toString() {
         return "doctor: id=" + id + " name=" + name + " exp=" + experienceYrs + " specId=" + specialization.getId();

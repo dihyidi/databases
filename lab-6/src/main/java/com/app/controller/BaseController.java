@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseController<TEntity, TDto, TId> {
-    protected abstract BaseService<TEntity, TId> getService();
+    protected abstract BaseService<TEntity, TId, TDto> getService();
     protected abstract BaseMapper<TEntity, TDto> getMapper();
 
     @RequestMapping(method = RequestMethod.GET)
@@ -36,18 +36,17 @@ public abstract class BaseController<TEntity, TDto, TId> {
 
     @RequestMapping(method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody ResponseEntity<Void> create(@RequestBody TEntity newEntity) {
-        getService().create(newEntity);
+    public @ResponseBody ResponseEntity<Void> create(@RequestBody TDto dto) {
+        getService().create(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT,
             value = "/{id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody ResponseEntity<TEntity> update(@PathVariable TId id, @RequestBody TEntity entity) {
+    public @ResponseBody ResponseEntity<TEntity> update(@PathVariable TId id, @RequestBody TDto dto) {
         if (getService().getById(id) != null) {
-            getService().update(id, entity);
-            return new ResponseEntity<>(getService().update(id, entity), HttpStatus.OK);
+            return new ResponseEntity<>(getService().update(id, dto), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

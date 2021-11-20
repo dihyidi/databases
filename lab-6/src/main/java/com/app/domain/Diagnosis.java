@@ -22,6 +22,11 @@ public class Diagnosis {
     @ManyToMany(mappedBy = "diagnoses")
     private List<Patient> patients;
 
+    public Diagnosis(String name, String protocol) {
+        this.name = name;
+        this.protocol = protocol;
+    }
+
     @Override
     public String toString() {
         return "diagnosis: id=" + id + " name=" + name + " protocol=" + protocol;

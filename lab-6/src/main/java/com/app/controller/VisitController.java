@@ -18,7 +18,7 @@ public class VisitController extends com.app.controller.BaseController<Visit, Vi
     private final VisitMapper mapper;
 
     @Override
-    protected BaseService<Visit, Integer> getService() {
+    protected BaseService<Visit, Integer, VisitDto> getService() {
         return service;
     }
 

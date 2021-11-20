@@ -32,6 +32,13 @@ public class Patient {
     )
     private Set<Diagnosis> diagnoses;
 
+    public Patient(String name, String surname, String address, Date birthday) {
+        this.birthday = birthday;
+        this.address = address;
+        this.surname = surname;
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "patient: id=" + id
