@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "swagger.host.url",
+      "type": "java.lang.String",
+      "description": "Description for swagger.host.url."
+    },
+    {
+      "name": "management.metrics.tags.application",
+      "type": "java.lang.String",
+      "description": "Description for management.metrics.tags.application."
+    }
+  ] }

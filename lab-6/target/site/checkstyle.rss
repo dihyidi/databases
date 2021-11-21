@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>lab-6 - Checkstyle report</title>
+    <link>https://spring.io/projects/spring-boot/lab-6</link>
+    <description>lab-6 - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2021</copyright>
+    <item>
+      <title>File: 36,
+             Errors: 240,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>https://spring.io/projects/spring-boot/lab-6/checkstyle.html</link>
+      <description>
+        <p>Click <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.dto.VisitDto.java">com/app/dto/VisitDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.dto.SpecializationDto.java">com/app/dto/SpecializationDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.DoctorController.java">com/app/controller/DoctorController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.VisitService.java">com/app/service/VisitService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.Application.java">com/app/Application.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.DoctorService.java">com/app/service/DoctorService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.DoctorMapper.java">com/app/mapper/DoctorMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.repo.DiagnosisRepo.java">com/app/repo/DiagnosisRepo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.dto.DoctorDto.java">com/app/dto/DoctorDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.PatientMapper.java">com/app/mapper/PatientMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.repo.SpecializationRepo.java">com/app/repo/SpecializationRepo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.domain.Visit.java">com/app/domain/Visit.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  15
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.repo.VisitRepo.java">com/app/repo/VisitRepo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.PatientService.java">com/app/service/PatientService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#application.properties">application.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.BaseMapper.java">com/app/mapper/BaseMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.repo.DoctorRepo.java">com/app/repo/DoctorRepo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.DiagnosisMapper.java">com/app/mapper/DiagnosisMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.SpecializationController.java">com/app/controller/SpecializationController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.config.SwaggerConfig.java">com/app/config/SwaggerConfig.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  14
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.domain.Diagnosis.java">com/app/domain/Diagnosis.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.SpecializationService.java">com/app/service/SpecializationService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.repo.PatientRepo.java">com/app/repo/PatientRepo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.dto.DiagnosisDto.java">com/app/dto/DiagnosisDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.domain.Patient.java">com/app/domain/Patient.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  19
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.BaseController.java">com/app/controller/BaseController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.BaseService.java">com/app/service/BaseService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  16
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.domain.Specialization.java">com/app/domain/Specialization.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.dto.PatientDto.java">com/app/dto/PatientDto.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.PatientController.java">com/app/controller/PatientController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.service.DiagnosisService.java">com/app/service/DiagnosisService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.VisitController.java">com/app/controller/VisitController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.domain.Doctor.java">com/app/domain/Doctor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  14
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.SpecializationMapper.java">com/app/mapper/SpecializationMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.mapper.VisitMapper.java">com/app/mapper/VisitMapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://spring.io/projects/spring-boot/lab-6/checkstyle.html#com.app.controller.DiagnosisController.java">com/app/controller/DiagnosisController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
