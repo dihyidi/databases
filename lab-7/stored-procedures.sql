@@ -48,15 +48,17 @@ fetch next from Table_Cursor into @firstName, @lastName
 while @@fetch_status=0
 begin 
 set @tableName=concat(@firstName, @lastName)
-set @sqlString='create table ' + @tableName
+set @sqlString='create table ' + @tableName + ' (Id int primary key identity); '
 execute(@sqlString)
+print @sqlString
 set @idx=0
 set @tableCount = rand() * 10
-while @idx < @tableCount
+while @idx != @tableCount
 begin
-set @sqlString='alter table ' + @tableName + 'add ' + @tableName + @idx + ' int not null'
-set @idx = @idx + 1
+set @sqlString='alter table ' + @tableName + ' add ' + @tableName + cast(@idx as nvarchar(50)) + ' int not null;'
+print @sqlString
 execute(@sqlString)
+set @idx = @idx + 1
 end
 execute(@sqlString)
 print @tableName

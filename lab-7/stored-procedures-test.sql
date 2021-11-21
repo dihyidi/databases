@@ -12,10 +12,10 @@ declare
 @statusId int,
 @degreeId int
 set @firstName = 'firstName'
-set @lastName = '@lastName'
+set @lastName = 'lastName'
 set @experienceYrs = 5
-set @birthday = '12-01-16 12:32'
-set @passport = '@passport'
+set @birthday = '1992-01-05'
+set @passport = 'passport'
 set @positionId = 1
 set @statusId = 2
 set @degreeId = 3
@@ -28,8 +28,8 @@ select * from Employees;
 declare
 @employeeId int,
 @subjectId int
-set @employeeId = 1
-set @subjectId = 1
+set @employeeId = 3
+set @subjectId = 9
 
 exec InsertIntoEmployeesToSubject @employeeId, @subjectId;
 

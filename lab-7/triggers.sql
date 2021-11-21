@@ -9,9 +9,13 @@ create trigger DegreeUpdate
 on Degrees
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from Degrees)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from Degrees))) 
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists DegreeDelete;
@@ -20,9 +24,12 @@ create trigger DegreeDelete
 on Degrees
 after delete 
 as
-begin 
-if ((select Id from deleted) in (select DegreeId from Employees)) 
-raiserror('there is at least one person with such data, you cannot delete it',16,1)
+declare @oldId int
+select @oldId=Id from deleted
+if (@oldId in (select DegreeId from Employees)) 
+begin
+print 'there is at least one person with such data, you cannot delete it'
+rollback transaction
 end
 
 --POSITIONS
@@ -32,9 +39,13 @@ create trigger PositionUpdate
 on Positions
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from Positions)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from Positions)))  
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists PositionDelete;
@@ -43,10 +54,13 @@ create trigger PositionDelete
 on Positions
 after delete 
 as
-begin 
-if ((select Id from deleted) in (select PositionId from Employees)) 
-raiserror('there is at least one person with such data, you cannot delete it',16,1)
-end
+declare @oldId int
+select @oldId=Id from deleted
+if (@oldId in (select PositionId from Employees)) 
+begin
+print 'there is at least one person with such data, you cannot delete it'
+rollback transaction
+end 
 
 --STATUSES
 drop trigger if exists StatusUpdate;
@@ -55,9 +69,13 @@ create trigger StatusUpdate
 on Statuses
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from Statuses)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from Statuses)))  
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists StatusDelete;
@@ -66,9 +84,12 @@ create trigger StatusDelete
 on Statuses
 after delete 
 as
-begin 
-if ((select Id from deleted) in (select StatusId from Employees)) 
-raiserror('there is at least one person with such data, you cannot delete it',16,1)
+declare @oldId int
+select @oldId=Id from deleted
+if (@oldId in (select StatusId from Employees)) 
+begin
+print 'there is at least one person with such data, you cannot delete it'
+rollback transaction
 end
 
 --RECEPTION_FORM
@@ -78,9 +99,13 @@ create trigger ReceptionFormUpdate
 on ReceptionForm
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from ReceptionForm)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from ReceptionForm)))  
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists ReceptionFormDelete;
@@ -101,9 +126,13 @@ create trigger EmployeeUpdate
 on Employees
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from Employees)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from Employees)))  
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists EmployeeDelete;
@@ -112,9 +141,12 @@ create trigger EmployeeDelete
 on Employees
 after delete 
 as
-begin 
-if ((select Id from deleted) in (select EmployeeId from EmployeesToSubjects)) 
-raiserror('there is at least one subject with such data, you cannot delete it',16,1)
+declare @oldId int
+select @oldId=Id from deleted
+if (@oldId in (select EmployeeId from EmployeesToSubjects)) 
+begin
+print 'there is at least one person with such data, you cannot delete it'
+rollback transaction
 end
 
 drop trigger if exists EmployeeInsert;
@@ -123,14 +155,29 @@ create trigger EmployeeInsert
 on Employees
 after insert 
 as
-begin 
-if ((select PositionId from inserted) not in (select Id from Positions)) 
-raiserror('fk error. not found',16,1)
-if ((select StatusId from inserted) not in (select Id from Statuses)) 
-raiserror('fk error. not found',16,1)
-if ((select DegreeId from inserted) not in (select Id from Degrees)) 
-raiserror('fk error. not found',16,1)
+declare @amount int
+
+select @amount=count(*) from inserted where PositionId not in (select Id from Positions)
+if (@amount != 0) 
+begin
+print 'fk error. positionId not found'
+rollback transaction
 end
+
+select @amount=count(*) from inserted where StatusId not in (select Id from Statuses)
+if (@amount != 0) 
+begin
+print 'fk error. StatusId not found'
+rollback transaction
+end
+
+select @amount=count(*) from inserted where DegreeId not in (select Id from Degrees)
+if (@amount != 0) 
+begin
+print 'fk error. DegreeId not found'
+rollback transaction
+end
+
 
 --SUBJECTS
 drop trigger if exists SubjectUpdate;
@@ -139,9 +186,13 @@ create trigger SubjectUpdate
 on Subjects
 after update
 as
-begin 
-if ((select Id from inserted) != (select Id from deleted) and (select Id from deleted) in ((select Id from Subjects)))  
-raiserror('not found',16,1)
+declare @newId int, @oldId int
+select @newId=Id from inserted
+select @oldId=Id from deleted
+if (@newId != @oldId and @oldId in ((select Id from Subjects)))  
+begin
+print 'not found'
+rollback transaction
 end 
 
 drop trigger if exists SubjectDelete;
@@ -150,9 +201,12 @@ create trigger SubjectDelete
 on Subjects
 after delete 
 as
-begin 
-if ((select Id from deleted) in (select SubjectId from EmployeesToSubjects)) 
-raiserror('there is at least one subject with such data, you cannot delete it',16,1)
+declare @oldId int
+select @oldId=Id from deleted
+if (@oldId in (select SubjectId from EmployeesToSubjects)) 
+begin
+print 'there is at least one person with such data, you cannot delete it'
+rollback transaction
 end
 
 drop trigger if exists SubjectInsert;
@@ -161,9 +215,12 @@ create trigger SubjectInsert
 on Subjects
 after insert 
 as
-begin 
-if ((select ReceptionFormId from inserted) not in (select Id from ReceptionForm)) 
-raiserror('fk error. not found',16,1)
+declare @amount int
+select @amount=count(*) from inserted where ReceptionFormId not in (select Id from ReceptionForm)
+if (@amount != 0) 
+begin
+print 'fk error. ReceptionFormId not found'
+rollback transaction
 end
 
 
@@ -174,11 +231,19 @@ create trigger EmployeesToSubjectInsert
 on EmployeesToSubjects
 after insert 
 as
-begin 
-if ((select EmployeeId from inserted) not in (select Id from Employees)) 
-raiserror('fk error. not found',16,1)
-if ((select SubjectId from inserted) not in (select Id from Subjects)) 
-raiserror('fk error. not found',16,1)
+declare @amount int
+select @amount=count(*) from inserted where EmployeeId not in (select Id from Employees)
+if (@amount != 0) 
+begin
+print 'fk error. EmployeeId not found'
+rollback transaction
+end
+
+select @amount=count(*) from inserted where SubjectId not in (select Id from Subjects)
+if (@amount != 0) 
+begin
+print 'fk error. SubjectId not found'
+rollback transaction
 end
 
 
@@ -189,9 +254,12 @@ create trigger ConstraintOnExperience
 on Employees
 after insert
 as
+declare @amount int
+select @amount=count(*) from inserted where ExperienceYrs > datediff(year, Birthday, getdate())
+if (@amount != 0) 
 begin
-if((select ExperienceYrs from inserted) > (datediff(year, (select Birthday from inserted), getdate())))
-raiserror('invalid data',16,1)
+print 'invalid data'
+rollback transaction
 end
 
 
@@ -202,9 +270,12 @@ create trigger ConstraintOnSemester
 on Subjects
 after insert
 as
+declare @amount int
+select @amount=count(*) from inserted where Semester not between 1 and 10
+if (@amount != 0) 
 begin
-if((select Semester from inserted) not between 1 and 10)
-raiserror('invalid data',16,1)
+print 'invalid data'
+rollback transaction
 end
 
 

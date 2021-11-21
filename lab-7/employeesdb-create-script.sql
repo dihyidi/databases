@@ -73,6 +73,3 @@ create table EmployeesJournal
 	EmployeeId int not null unique,
 	WhenInserted datetime not null
 );
-
-insert into Subjects
-values('sub1', 3, 3, 2);
