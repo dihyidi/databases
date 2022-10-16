@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.21.0" timestamp="2021-11-18T20:44:00.087">
+<file name="C:\Users\dnkov\tazasho\3\db\lab-6\src\main\java\com\app\controller\VisitController.java">
+<violation beginline="16" endline="16" begincolumn="38" endcolumn="96" rule="UnnecessaryFullyQualifiedName" ruleset="Code Style" package="com.app.controller" class="VisitController" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#unnecessaryfullyqualifiedname" priority="4">
+Unnecessary use of fully qualified name 'com.app.controller.BaseController' due to existing same package import 'com.app.controller.*'
+</violation>
+</file>
+</pmd>
